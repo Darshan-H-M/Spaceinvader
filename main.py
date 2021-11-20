@@ -10,16 +10,14 @@ from pygame import mixer
 pygame.init()
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
-# creatinge screen
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
-screen = pygame.display.set_mode((1020, 900))  # width height
+screen = pygame.display.set_mode((1020, 900)) 
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
-# game title and logo >> for logo flaticon.com
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
-pygame.display.set_caption("Space Invaders")  # title
-icon = pygame.image.load("images/chicken.png")  # load icon image
-pygame.display.set_icon(icon)  # set the loaded image
+pygame.display.set_caption("Space Invaders") 
+icon = pygame.image.load("images/chicken.png")  
+pygame.display.set_icon(icon) 
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
 # background image
@@ -31,12 +29,9 @@ background4 = pygame.image.load("background Images/level1.jpg")
 background5 = pygame.image.load("background Images/level3.jpg")
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
-# BACKGROUND-mUSIC
 mixer.music.load("music/background.wav")
-mixer.music.play(-1)  # -1 helps to continuous
+mixer.music.play(-1)  
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
-
-
 # player
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
 playerimg = pygame.image.load("images/spaceship123.png")
@@ -67,8 +62,8 @@ for i in range(num_of_enemies):
     enemyimg.append(pygame.image.load("images/silly.png"))
     enemyimg.append(pygame.image.load("images/space-ship.png"))
     enemyimg.append(pygame.image.load("images/shocked.png"))
-    enemyx.append(random.randint(0, 956))  # to make random location (enemy move)
-    enemyy.append(random.randint(90, 180))  # to make random location
+    enemyx.append(random.randint(0, 956))  
+    enemyy.append(random.randint(90, 180)) 
     enemyx_change.append(0.9)
     enemyy_change.append(45)
 
@@ -93,23 +88,23 @@ bullet_state = "ready"
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
 def game_over():
     gameOver = pygame.font.Font("freesansbold.ttf", 64)
-    game = gameOver.render("GAME OVER", True, (0, 255, 0))  # use to render over display, color
+    game = gameOver.render("GAME OVER", True, (0, 255, 0))  
     screen.blit(game, (325, 350))
-    gameOver_sound = mixer.Sound("music/gameover.wav")  # instead of music append sound to additional sounds
+    gameOver_sound = mixer.Sound("music/gameover.wav")  
     gameOver_sound.play(0)
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
 def player(a,x, y):
-    screen.blit(a, (x, y))  # blit --- helps to draw image inside a screen,,,,,(playerimg, and co-ordinates)
+    screen.blit(a, (x, y))  
 
 
 
 def enemy(x, y, i):
-    screen.blit(enemyimg[i], (x, y))  # blit --- helps to draw image inside a screen,,,,,(enemyimg, and co-ordinates)
+    screen.blit(enemyimg[i], (x, y))  
 
 
-def fire_button(a,x, y):  # bullet appear playerx width, and bullety height
+def fire_button(a,x, y):  
     global bullet_state
     bullet_state = "fire"
     screen.blit(a, (x + 16, y + 20))
@@ -142,31 +137,30 @@ texty = 10
 
 
 # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
-# score function
 def showscore(x, y):
-    score1 = font.render("Score: " + str(score), True, (0, 255, 0))  # use to render over display, color
+    score1 = font.render("Score: " + str(score), True, (0, 255, 0))  
     screen.blit(score1, (x, y))
 def levels(x, y):
     level = 1
     if score > 100:
         level += 4
-        level = font.render(f"Level: {level} ", True, (0, 255, 0))  # use to render over display, color
+        level = font.render(f"Level: {level} ", True, (0, 255, 0)) 
         screen.blit(level, (x, y))
     elif score >= 50 and score < 100:
         level += 3
-        level = font.render(f"Level: {level} ", True, (0, 255, 0))  # use to render over display, color
+        level = font.render(f"Level: {level} ", True, (0, 255, 0))  
         screen.blit(level, (x, y))
     elif score > 30 and score <= 50:
         level += 2
-        level = font.render(f"Level: {level} ", True, (0, 255, 0))  # use to render over display, color
+        level = font.render(f"Level: {level} ", True, (0, 255, 0)) 
         screen.blit(level, (x, y))
     elif score > 10 and score <= 30:
         level += 1
-        level = font.render(f"Level: {level} ", True, (0, 255, 0))  # use to render over display, color
+        level = font.render(f"Level: {level} ", True, (0, 255, 0)) 
         screen.blit(level, (x, y))
     else:
         if score >= 0 and score <= 10:
-            level = font.render(f"Level: {level} ", True, (0, 255, 0))  # use to render over display, color
+            level = font.render(f"Level: {level} ", True, (0, 255, 0)) 
             screen.blit(level, (x, y))
 
 
@@ -175,7 +169,7 @@ while running:
     screen.fill((0, 0, 0))
     if score >= 0 and score <=10:
         screen.blit(background, (0, 0))
-        player(playerimg,playerx, playery)  # call the function
+        player(playerimg,playerx, playery)  
     elif score > 10 and score <= 30:
         screen.blit(background2, (0, 0))
         player(playerimg2,playerx, playery)
@@ -190,8 +184,8 @@ while running:
             screen.blit(background5, (0, 0))
             player(playerimg5,playerx, playery)
 
-    for event in pygame.event.get():  # get all the event in the pygame
-        if event.type == pygame.QUIT:  # when cross bar is pressed it assumes quit then set to false
+    for event in pygame.event.get():  
+        if event.type == pygame.QUIT:  
             running = False
         # directions------
         if event.type == pygame.KEYDOWN:
@@ -247,7 +241,7 @@ while running:
                             bullet_sound.play()
 
         if event.type == pygame.KEYUP:
-            # print("key Realsed")
+            
             if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                 playerx_change = 0
     # -------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -339,5 +333,4 @@ while running:
 
     showscore(textx, texty)
     levels(890,10)
-    # update the color
-    pygame.display.update()  # update the background color
+    pygame.display.update()  
