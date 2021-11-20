@@ -1,5 +1,5 @@
 
 # Spaceinvader Game
-Pycharm
-Install all the Libraries.
+#Pycharm
+#Install all the Libraries.
 
